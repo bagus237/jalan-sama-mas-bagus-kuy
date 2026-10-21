@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#FFE8D1" />
+  <title>Jalan Kuy?</title>
+  <meta name="description" content="Ada undangan kecil buat kamu 🐱🧡" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg-floaties" aria-hidden="true"></div>
+
+  <main class="card">
+    <!-- 1. Pertanyaan -->
+    <section class="screen active" id="screen-ask">
+      <div class="cat" data-mood="normal"></div>
+      <p class="hello">Hai <span class="nama"></span> 👋</p>
+      <h1>Mau jalan bareng aku gak? 🥺</h1>
+      <div class="btn-row">
+        <button class="btn btn-yes" id="btn-yes">Yes 😻</button>
+        <button class="btn btn-no" id="btn-no">No 😿</button>
+      </div>
+    </section>
+
+    <!-- 2. Pilih tanggal -->
+    <section class="screen" id="screen-date">
+      <div class="cat" data-mood="happy"></div>
+      <h1>Yeay! 🧡</h1>
+      <p class="sub">Kapan kamu bisanya?</p>
+      <form id="date-form" novalidate>
+        <label>
+          <span>Tanggal 📅</span>
+          <input type="date" name="tanggal" id="input-tanggal" required />
+        </label>
+        <label>
+          <span>Jam (opsional) ⏰</span>
+          <input type="time" name="jam" />
+        </label>
+        <label>
+          <span>Mau ke mana? (opsional) 🍦</span>
+          <textarea name="catatan" rows="2" maxlength="300" placeholder="makan, nonton, jajan..."></textarea>
+        </label>
+        <p class="error" id="form-error" role="alert"></p>
+        <button type="submit" class="btn btn-yes btn-block" id="btn-submit">Kirim 💌</button>
+      </form>
+    </section>
+
+    <!-- 3. Terima kasih -->
+    <section class="screen" id="screen-thanks">
+      <div class="cat" data-mood="love"></div>
+      <h1>Yeay, deal! 🎉</h1>
+      <p class="sub">Sampai ketemu <strong id="thanks-date"></strong> 🧡</p>
+      <p class="tiny">nanti aku jemput ya 🐾</p>
+    </section>
+
+    <!-- 4. Sedih -->
+    <section class="screen" id="screen-sad">
+      <div class="cat" data-mood="sad"></div>
+      <blockquote class="quote">“ya udah, emang aku gak sepenting itu”</blockquote>
+      <p class="tiny">🥀 *kucing oren pundung di pojokan*</p>
+      <button class="btn btn-ghost" id="btn-back">eh, aku berubah pikiran 🙈</button>
+    </section>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="cat.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
