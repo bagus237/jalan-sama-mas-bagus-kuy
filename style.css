@@ -134,6 +134,12 @@ h1 {
 .cat .cloud { animation: cloudFloat 3s ease-in-out infinite; }
 .cat .rain { animation: rain 0.7s linear infinite; }
 
+/* mulut kebuka pas meow */
+.cat .mouth-open { display: none; transform-origin: 50% 0%; }
+.cat.meowing .mouth-closed { display: none; }
+.cat.meowing .mouth-open { display: block; animation: yap 0.3s ease-in-out infinite alternate; }
+@keyframes yap { from { transform: scaleY(0.55); } to { transform: scaleY(1.05); } }
+
 /* tap = boop */
 .cat.boop svg { animation: boop 0.5s cubic-bezier(.3,1.6,.5,1) !important; }
 
@@ -277,6 +283,37 @@ textarea { resize: none; }
   border-radius: 20px;
   padding: 16px 18px;
   position: relative;
+}
+
+/* Musik latar */
+.music-btn {
+  position: fixed;
+  top: max(14px, env(safe-area-inset-top));
+  right: 14px;
+  z-index: 10;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 3px solid #ffe3c8;
+  background: var(--card);
+  font-size: 22px;
+  line-height: 1;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.music-btn[hidden] { display: none; }
+.music-btn.playing { animation: beat 1.2s ease-in-out infinite; }
+
+/* Player disembunyikan di luar layar (bukan display:none, supaya YouTube tetap main) */
+#yt-player-wrap {
+  position: fixed;
+  left: -9999px;
+  top: 0;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  pointer-events: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

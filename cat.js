@@ -153,7 +153,11 @@
     <ellipse class="blush" cx="56" cy="122" rx="10" ry="6.5" fill="${PINK}" opacity=".6"/>
     <ellipse class="blush" cx="144" cy="122" rx="10" ry="6.5" fill="${PINK}" opacity=".6"/>
     <path d="M94 112 Q100 108 106 112 Q100 119 94 112 Z" fill="#FF6F91"/>
-    ${mouth(mood)}
+    <g class="mouth-closed">${mouth(mood)}</g>
+    <g class="mouth-open">
+      <path d="M88 120 Q100 118 112 120 Q114 140 100 142 Q86 140 88 120 Z" fill="#8B2635" stroke="${INK}" stroke-width="3.5" stroke-linejoin="round"/>
+      <ellipse cx="100" cy="135" rx="7" ry="5" fill="#FF7A93"/>
+    </g>
     <g class="whiskers whiskers-l"><path d="M52 116 L22 110 M52 122 L20 124 M54 128 L26 136" stroke="#C9772E" stroke-width="2.2" stroke-linecap="round"/></g>
     <g class="whiskers whiskers-r"><path d="M148 116 L178 110 M148 122 L180 124 M146 128 L174 136" stroke="#C9772E" stroke-width="2.2" stroke-linecap="round"/></g>
   </g>
@@ -170,8 +174,31 @@
     sad: ["hiks... 😿", "...", "jahat 🥲", "*sniff*"],
   };
 
+  // ---------- Suara meow (rekaman kucing CC0, nadanya dinaikkan jadi suara anak kucing) ----------
+  const meowSound = new Audio("meow1.m4a");
+  meowSound.preload = "auto";
+  const MEOW_SECONDS = 0.89;
+  // Memutar meow, mengembalikan lama suara (ms) supaya mulut kucing bisa sinkron
+  function meow(mood) {
+    try {
+      const a = meowSound.cloneNode();
+      // sad = lebih rendah/lambat, happy = lebih tinggi/ceria
+      const rate = ({ sad: 0.8, happy: 1.12, love: 1.05 }[mood] || 1) * (0.95 + Math.random() * 0.1);
+      a.preservesPitch = false;
+      a.playbackRate = rate;
+      a.play().catch(() => {});
+      return (MEOW_SECONDS / rate) * 1000;
+    } catch (_) {
+      return 800;
+    }
+  }
+
   function boop(el) {
     const mood = el.dataset.mood;
+    const ms = meow(mood);
+    el.classList.add("meowing");
+    clearTimeout(el._meowTimer);
+    el._meowTimer = setTimeout(() => el.classList.remove("meowing"), ms);
     el.classList.remove("boop");
     void el.offsetWidth; // restart animasi
     el.classList.add("boop");
