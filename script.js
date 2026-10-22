@@ -31,13 +31,18 @@
   // Tiap kali balik dari layar sedih, tombol Yes makin besar
   let yesScale = 1;
   const btnYes = $("#btn-yes");
-  $("#btn-yes").addEventListener("click", () => show("date"));
-  $("#btn-no").addEventListener("click", () => show("sad"));
+  // Pindah layar + kucing di layar baru meow
+  function showAndMeow(id) {
+    show(id);
+    window.catSpeak($("#screen-" + id + " .cat"));
+  }
+  $("#btn-yes").addEventListener("click", () => showAndMeow("date"));
+  $("#btn-no").addEventListener("click", () => showAndMeow("sad"));
   $("#btn-back").addEventListener("click", () => {
     yesScale = Math.min(yesScale + 0.2, 1.8);
     btnYes.style.fontSize = 19 * yesScale + "px";
     btnYes.style.padding = `${14 * yesScale}px ${30 * yesScale}px`;
-    show("ask");
+    showAndMeow("ask");
   });
 
   // ---------- Form tanggal ----------

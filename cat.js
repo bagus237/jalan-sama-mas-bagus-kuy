@@ -226,6 +226,11 @@
     }
   }
 
+  // Dipanggil dari script.js saat pindah layar
+  window.catSpeak = function (el) {
+    if (el) boop(el);
+  };
+
   window.initCats = function () {
     document.querySelectorAll(".cat").forEach((el) => {
       el.innerHTML = catSVG(el.dataset.mood);
@@ -237,6 +242,17 @@
         if (e.key === "Enter" || e.key === " ") { e.preventDefault(); boop(el); }
       });
     });
+
+    // Sentuhan pertama di halaman: kucing menyapa. Browser melarang suara otomatis
+    // sebelum ada interaksi, jadi ini momen paling awal yang bisa. Tombol punya meow sendiri.
+    window.addEventListener(
+      "pointerdown",
+      (e) => {
+        if (e.target.closest("button")) return;
+        boop(document.querySelector(".screen.active .cat"));
+      },
+      { once: true, capture: true }
+    );
 
     // Mata ngikutin kursor / jari
     const follow = (x, y) => {
