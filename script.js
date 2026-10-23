@@ -6,7 +6,7 @@
 
   // ---------- Emoji melayang ----------
   const floaties = $(".bg-floaties");
-  const emojis = ["🐱", "🧡", "🐾", "😺", "💛", "🌸","❤️","😻","💕","😽","🫶","👩‍❤️‍💋‍👨"];
+  const emojis = ["🐱", "🧡", "🐾", "😺", "💛", "🌸","❤️","😻","💕","😽","🫶","😍","🥰"];  
   for (let i = 0; i < 14; i++) {
     const s = document.createElement("span");
     s.textContent = emojis[i % emojis.length];
@@ -109,7 +109,7 @@
       }
       $("#thanks-date").textContent =
         formatTanggal(tanggal) + (payload.jam ? `, jam ${payload.jam}` : "");
-      show("thanks");
+      showAndMeow("thanks");
     } catch (err) {
       errorEl.textContent = "Yah, gagal kirim. Coba lagi ya 😿";
       btnSubmit.disabled = false;
