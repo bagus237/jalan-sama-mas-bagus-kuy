@@ -30,6 +30,24 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Mendung saat ditolak (overlay, karena gradient tidak bisa di-transition) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse 45% 14% at 15% 4%, #7d8a99 60%, transparent 100%),
+              radial-gradient(ellipse 50% 18% at 55% 0%, #6c7989 60%, transparent 100%),
+              radial-gradient(ellipse 45% 15% at 92% 6%, #8490a0 60%, transparent 100%),
+              linear-gradient(180deg, #8f9bab, #b4bec9 55%, #cdd3da);
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+body.sad::before { opacity: 1; }
+/* emoji sedih jatuh dari atas, bukan melayang naik */
+body.sad .bg-floaties span { animation-direction: reverse; opacity: 0.75; }
+body.sad .card { border-color: #c5ced8; box-shadow: 0 12px 30px rgba(60, 75, 95, 0.25); }
+
 /* Emoji melayang di background */
 .bg-floaties {
   position: fixed;
@@ -60,6 +78,7 @@ body {
   box-shadow: var(--shadow);
   text-align: center;
   border: 3px solid #ffe3c8;
+  transition: border-color 0.8s, box-shadow 0.8s;
 }
 
 .screen { display: none; }

@@ -16,12 +16,12 @@ Kalau `?nama=` tidak diisi, halaman menyapa "kamu". Nama yang ada spasi tetap am
 
 1. Buka [sheets.new](https://sheets.new), kasih nama misal "Jalan Kuy".
 2. Menu **Extensions > Apps Script**.
-3. Hapus isi default, paste isi `apps-script.gs`, klik Save.
+3. Hapus isi default, paste isi `apps-script/Code.gs`, klik Save.
 4. Klik **Deploy > New deployment**, pilih type **Web app**:
    - Execute as: **Me**
    - Who has access: **Anyone**
 5. Klik Deploy, izinkan akses (Advanced > Go to project kalau muncul peringatan).
-6. Copy **Web app URL** (berakhiran `/exec`), paste ke `SHEET_URL` di `config.js`.
+6. Copy **Web app URL** (berakhiran `/exec`), paste ke `SHEET_URL` di `assets/js/config.js`.
 
 Kalau nanti kode Apps Script diubah, deploy ulang lewat **Deploy > Manage deployments > Edit > New version** supaya URL tetap sama.
 
@@ -43,3 +43,17 @@ npx vercel --prod # production
 ```
 
 Opsi B, push ke GitHub lalu import di [vercel.com/new](https://vercel.com/new). Framework preset: **Other**, root directory: folder `jalankuy`, tanpa build command.
+
+## Struktur folder
+
+```
+jalankuy/
+├── index.html
+├── vercel.json
+├── assets/
+│   ├── css/style.css
+│   ├── js/          # config.js, music.js, cat.js, script.js
+│   └── audio/meow1.m4a
+└── apps-script/
+    └── Code.gs      # di-paste ke Google Apps Script
+```
