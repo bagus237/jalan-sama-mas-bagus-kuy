@@ -6,7 +6,8 @@
 
   // ---------- Emoji melayang ----------
   const floaties = $(".bg-floaties");
-  const emojis = ["🐱", "🧡", "🐾", "😺", "💛", "🌸","❤️","😻","💕","😽","🫶","😍","🥰"];  
+  const emojis = ["🐱", "🧡", "🐾", "😺", "💛", "🌸","❤️","😻","💕","😽","🫶","😍","🥰"];
+  const sadEmojis = ["😿", "💔", "🥀", "☁️", "🌧️", "💧", "😢", "🥺", "😭", "😞"];
   for (let i = 0; i < 14; i++) {
     const s = document.createElement("span");
     s.textContent = emojis[i % emojis.length];
@@ -17,10 +18,18 @@
     floaties.appendChild(s);
   }
 
+  // Ditolak: langit mendung + emoji melayang jadi sedih
+  function setMood(sad) {
+    document.body.classList.toggle("sad", sad);
+    const set = sad ? sadEmojis : emojis;
+    floaties.querySelectorAll("span").forEach((s, i) => (s.textContent = set[i % set.length]));
+  }
+
   // ---------- Navigasi screen ----------
   function show(id) {
     document.querySelectorAll(".screen").forEach((s) => s.classList.remove("active"));
     $("#screen-" + id).classList.add("active");
+    setMood(id === "sad");
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
@@ -105,7 +114,7 @@
           body: new URLSearchParams(payload),
         });
       } else {
-        console.warn("SHEET_URL belum diisi di config.js, data tidak disimpan ke Google Sheets.");
+        console.warn("SHEET_URL belum diisi di assets/js/config.js, data tidak disimpan ke Google Sheets.");
       }
       $("#thanks-date").textContent =
         formatTanggal(tanggal) + (payload.jam ? `, jam ${payload.jam}` : "");

@@ -175,7 +175,7 @@
   };
 
   // ---------- Suara meow (rekaman kucing CC0, nadanya dinaikkan jadi suara anak kucing) ----------
-  const meowSound = new Audio("meow1.m4a");
+  const meowSound = new Audio("assets/audio/meow1.m4a");
   meowSound.preload = "auto";
   const MEOW_SECONDS = 0.89;
   // Memutar meow, mengembalikan lama suara (ms) supaya mulut kucing bisa sinkron
